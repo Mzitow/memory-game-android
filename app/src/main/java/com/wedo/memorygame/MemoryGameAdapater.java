@@ -5,16 +5,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MemoryGameAdapater extends RecyclerView.Adapter<MemoryGameAdapater.ViewHolder> {
@@ -22,15 +17,16 @@ public class MemoryGameAdapater extends RecyclerView.Adapter<MemoryGameAdapater.
     private final  int CARD_MARGIN = 10;
     private Context currentContext;
     private MemoryLevel memoryLevel;
-    private List<Integer> images;
+    private List<MemoryCard> selectedCards;
     LayoutInflater myInflater;
+    private CardOnClickListener onClickListener;
 
-    public MemoryGameAdapater(Context context, MemoryLevel memoryLevel, List<Integer> images) {
+    public MemoryGameAdapater(Context context, MemoryLevel memoryLevel, List<MemoryCard> selectedCards, CardOnClickListener listener) {
         this.currentContext = context;
         this.memoryLevel = memoryLevel;
         this.myInflater = LayoutInflater.from(context);
-        this.images = images;
-
+        this.selectedCards = selectedCards;
+        this.onClickListener = listener;
     }
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -64,14 +60,18 @@ public class MemoryGameAdapater extends RecyclerView.Adapter<MemoryGameAdapater.
     public void onBindViewHolder( MemoryGameAdapater.ViewHolder holder, int position) {
 
 
-        holder.myButton.setImageResource(images.get(position));
 
-        holder.myButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(currentContext, "Clicked : " + position, Toast.LENGTH_SHORT).show();
-            }
+
+        holder.myButton.setOnClickListener(v -> {
+            if(!selectedCards.get(position).isFaceUp())
+                holder.myButton.setImageResource(selectedCards.get(position).getIdentifier());
+            else
+                holder.myButton.setImageResource(R.drawable.ic_launcher_background);
+
+            onClickListener.onCardClick(position, selectedCards.get(position));
         });
+
+
     }
 
     @Override
@@ -88,5 +88,9 @@ public class MemoryGameAdapater extends RecyclerView.Adapter<MemoryGameAdapater.
 
             myButton = itemView.findViewById(R.id.image_button);
         }
+    }
+
+    public interface CardOnClickListener{
+        void onCardClick(int cardPosition, MemoryCard memoryCard);
     }
 }

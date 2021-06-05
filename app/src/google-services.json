@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "556540071990",
+    "project_id": "memory-flipper",
+    "storage_bucket": "memory-flipper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556540071990:android:84b84f13df02f30e32c897",
+        "android_client_info": {
+          "package_name": "com.wedo.memorygame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556540071990-vt60gput97pivtlh1la39ou7c3mqt694.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdMBZbIN2UpnkyR7sj8uOT68oIzzj6S5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556540071990-vt60gput97pivtlh1la39ou7c3mqt694.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
